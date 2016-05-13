@@ -22,7 +22,7 @@ int main(void)
 	UA_ServerConfig conf;	//Server config
 	UA_Int32 val;	//the var value
 	UA_VariableAttributes attr;	//the var attribues
-	UA_NodeId selfNodeId, parentNodeId, parRefNodeId, varType;	//the node-ID
+	UA_NodeId selfNodeId, parentNodeId, parRefNodeId, varType;//the node-ID
 	UA_QualifiedName bName;	//browse-name
 
 	signal(SIGINT, stopHandler);
@@ -45,8 +45,10 @@ int main(void)
 	 *  Set the variable and variable attribute
 	*/
 	val = 5566;
+	UA_String str = UA_STRING_ALLOC("Hello, world");
 	UA_VariableAttributes_init(&attr);	
-	UA_Variant_setScalar(&attr.value, &val, &UA_TYPES[UA_TYPES_INT32]);	
+//	UA_Variant_setScalar(&attr.value, &val, &UA_TYPES[UA_TYPES_INT32]);	
+	UA_Variant_setScalarCopy(&attr.value, &str, &UA_TYPES[UA_TYPES_STRING]);
 	attr.displayName = UA_LOCALIZEDTEXT("TW", "the fucker");
 	/*
 	 * Step 3.

@@ -40,15 +40,25 @@ int main(void)
 	 * Step 4.
 	 *	call the `UA_Client_Service_read` to read
 	*/
+	UA_ReadResponse_init(&resp);
 	resp = UA_Client_Service_read(clt, req);
-	if(resp.responseHeader.serviceResult == UA_STATUSCODE_GOOD &&
+/*	if(resp.responseHeader.serviceResult == UA_STATUSCODE_GOOD &&
 		resp.resultsSize > 0 &&
 		resp.results[0].hasValue &&
 		UA_Variant_isScalar(&resp.results[0].value) &&
 		resp.results[0].value.type == &UA_TYPES[UA_TYPES_INT32])
+	{*/
+	if(resp.responseHeader.serviceResult == UA_STATUSCODE_GOOD &&
+		resp.resultsSize > 0 &&
+		resp.results[0].hasValue &&
+		UA_Variant_isScalar(&resp.results[0].value) &&
+		resp.results[0].value.type == &UA_TYPES[UA_TYPES_STRING])
 	{
+		UA_String *str = (UA_String *)resp.results[0].value.data;
+		printf("The string : %s\n", str->data);
+		/*
 		UA_Int32 *val = (UA_Int32 *)resp.results[0].value.data;
-		printf("The value is: %d\n", *val);
+		printf("The value is: %d\n", *val);*/
 	}
 	/*
 	 * Step 5.
