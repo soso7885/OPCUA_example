@@ -1,3 +1,4 @@
+DEMO = demo_src
 SVR_SRC = server.c
 CLT_SRC = client.c
 CFLAG = -Wall -std=c99 -g
@@ -9,7 +10,7 @@ TARGET = MySvr
 TARGET += MyClt
 
 all : $(TARGET)
-	make -C ./demo_test
+	make -C ./$(DEMO)
 
 MySvr: $(SVR_SRC)
 	$(CC) $(CFLAG) $(INCLUDE_PATH) -o $@ $(SVR_SRC) $(LIB_PATH) $(LIB)
@@ -19,4 +20,4 @@ MyClt: $(CLT_SRC)
 	
 clean:
 	rm -f $(TARGET)
-	make clean -C ./demo_test
+	make clean -C ./$(DEMO)

@@ -1,3 +1,5 @@
+BUILD = demo_build
+
 CLT = client.c
 CLT_FS = client_firstSteps.c
 CLT_SL = client_stateless.c
@@ -24,7 +26,7 @@ TARGET += ExSvr_firstStep
 TARGET += ExSvr_mainLoop
 TARGET += ExSvr_method
 #TARGET += ExSvr_nodeSet
-#TARGET += ExSvr_readSpeed
+TARGET += ExSvr_readSpeed
 TARGET += ExSvr_repeat_job
 #TARGET += ExSvr_udp
 TARGET += ExSvr_var
@@ -33,6 +35,8 @@ TARGET += ExClt_firstStep
 #TARGET += ExClt_stateLess
 
 all : $(TARGET)
+	mkdir ../$(BUILD)
+	mv $(TARGET) ../$(BUILD)
 
 ExSvr: $(SVR)
 	$(CC) $(CFLAG) $(INCLUDE_PATH) -o $@ $(SVR) $(LIB_PATH) $(LIB)
@@ -74,4 +78,4 @@ ExClt_stateLess: $(CLT_SL)
 	$(CC) $(CFLAG) $(INCLUDE_PATH) -o $@ $(CLT_SL) $(LIB_PATH) $(LIB)
 	
 clean:
-	rm -f $(TARGET)
+	rm -rf ../$(BUILD)
